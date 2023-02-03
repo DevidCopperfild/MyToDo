@@ -5,8 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MyToDo"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MyToDo" Height="450" Width="800">
     <Grid>
-        
+        <DataGrid x:Name="dgToDoList" FontSize="16" FontWeight="SemiBold" Margin="5">
+            <DataGrid.Columns>
+                <DataGridTextColumn IsReadOnly="False" Header="Date" Width="180"/>
+                <DataGridCheckBoxColumn IsReadOnly="True" Header="Done" Width="80"/>
+                <DataGridTextColumn IsReadOnly="True" Header="Task" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Window>
