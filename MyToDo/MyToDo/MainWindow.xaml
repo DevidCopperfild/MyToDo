@@ -26,6 +26,7 @@
 
                 <DataGridCheckBoxColumn Binding="{Binding Path = IsDone, UpdateSourceTrigger = PropertyChanged}" Header="Done" Width="65" CanUserResize="True" CanUserSort="True"/>
                 <DataGridTextColumn Binding="{Binding Path = Text}" IsReadOnly="False" Header="Task" Width="*"/>
+                <DataGridTextColumn Binding="{Binding Path = CreationDate}" IsReadOnly="True" Header="Date" Width="160"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
