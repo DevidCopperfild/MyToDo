@@ -14,12 +14,15 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MyToDo.Models;
+using MyToDo.Services;
 
 namespace MyToDo
 {
     public partial class MainWindow : Window
     {
-        private BindingList<ToDoModel> _toDoData;
+        private readonly string PATH = $"{Environment.CurrentDirectory}\\ToDoDataList.json";
+        private BindingList<ToDoModel> _toDoDataList;
+        private FileIOService _fileIOService;
 
         public MainWindow()
         {
@@ -28,13 +31,36 @@ namespace MyToDo
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            _toDoData = new BindingList<ToDoModel>()
-            {
-                new ToDoModel(){Text = "text"},
-                new ToDoModel(){Text = "djsad"}
-            };
+            _fileIOService = new FileIOService(PATH);
 
-            dgToDoList.ItemsSource = _toDoData;
+            try
+            {
+                _toDoDataList = _fileIOService.LoadData();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                Close();
+            }
+
+            dgToDoList.ItemsSource = _toDoDataList;
+            _toDoDataList.ListChanged += _toDoDataList_ListChanged; 
+        }
+
+        private void _toDoDataList_ListChanged(object sender, ListChangedEventArgs e)
+        {
+            if(e.ListChangedType == ListChangedType.ItemAdded || e.ListChangedType == ListChangedType.ItemDeleted || e.ListChangedType == ListChangedType.ItemChanged)
+            {
+                try
+                {
+                    _fileIOService.SaveData(sender);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    Close();
+                }
+            }
         }
     }
 }

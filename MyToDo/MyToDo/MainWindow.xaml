@@ -17,8 +17,8 @@
                 </TransformGroup>
             </DataGrid.RenderTransform>
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Path = CreationDate}" IsReadOnly="True" Header="Date" Width="180"/>
-                <DataGridCheckBoxColumn Binding="{Binding Path = IsDone}" IsReadOnly="False" Header="Done" Width="80"/>
+                <DataGridTextColumn Binding="{Binding Path = CreationDate}" IsReadOnly="True" Header="Date" Width="160"/>
+                <DataGridCheckBoxColumn Binding="{Binding Path = IsDone, UpdateSourceTrigger = PropertyChanged}" IsReadOnly="False" Header="Done" Width="65"/>
                 <DataGridTextColumn Binding="{Binding Path = Text}" IsReadOnly="False" Header="Task" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
